@@ -12,15 +12,6 @@ public class GameManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
-    private void OnEnable()
-    {
-    }
-
-
-    private void OnDisable()
-    {
-    }
-
     private void Start()
     {
         UpdateGameState(GameState.Inside);

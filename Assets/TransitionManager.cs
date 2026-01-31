@@ -25,13 +25,14 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
-    public void StartTranstion()
+    public void StartTranstion(bool transToCharacter, bool transIn, GameState gameState)
     {
         transitionImage.gameObject.SetActive(true);
-        StartCoroutine(FadeTransition());
+        StartCoroutine(FadeTransition(transToCharacter, transIn));
+        GameManager.Instance.UpdateGameState(gameState);
     }
 
-    private IEnumerator FadeTransition()
+    private IEnumerator FadeTransition(bool transToCharacter, bool transIn)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -44,9 +45,13 @@ public class TransitionManager : MonoBehaviour
 
         SetAlpha(1f);
 
-        yield return new WaitForSeconds(0.5f);
-        CharacterImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
         
+        if (transToCharacter)
+        {
+            CharacterImage.gameObject.SetActive(transIn);
+        } 
+
         elapsed = 0f;
         while (elapsed < duration)
         {

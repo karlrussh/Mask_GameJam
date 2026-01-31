@@ -21,19 +21,19 @@ MonoBehaviour:
       answers:
       - answerLabel: Who are you?
         nextElement: 1
+        isImportantQuestion: 0
       - answerLabel: You good?
-        nextElement: 2
+        nextElement: 1
+        isImportantQuestion: 0
       - answerLabel: yo
-        nextElement: 3
+        nextElement: 1
+        isImportantQuestion: 1
   - dialogue:
     - Skippy
-    endAfterDialogue: 1
+    endAfterDialogue: 0
     branchPoint:
-      question: What do you want?
+      question: wbu
       answers:
-      - answerLabel: Who are you?
-        nextElement: 1
-      - answerLabel: You good?
-        nextElement: 2
-      - answerLabel: yo
-        nextElement: 3
+      - answerLabel: fart
+        nextElement: 0
+        isImportantQuestion: 1

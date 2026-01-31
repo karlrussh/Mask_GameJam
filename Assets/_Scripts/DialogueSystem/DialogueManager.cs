@@ -57,7 +57,15 @@ public class DialogueManager : MonoBehaviour
         {
             OnDialogueEnded?.Invoke();
             dialoguePanel.SetActive(false);
-            CharacterImage.gameObject.SetActive(false);
+            TransitionManager.instance.StartTranstion(true, false, GameState.Inside);
+            yield break;
+        }
+
+        if (SocialBatteryManager.instance.CurrentSocialBattery == 0)
+        {
+            OnDialogueEnded?.Invoke();
+            dialoguePanel.SetActive(false);
+            TransitionManager.instance.StartTranstion(true, false, GameState.Inside);
             yield break;
         }
 
@@ -71,7 +79,14 @@ public class DialogueManager : MonoBehaviour
         answerBox.SetActive(false);
         answerTriggered = false;
 
-        StartCoroutine(RunDialogue(dialogueTree, dialogueTree.sections[section].branchPoint.answers[answerIndex].nextElement));
+        bool isImportant = dialogueTree.sections[section].branchPoint.answers[answerIndex].isImportantQuestion;
+        if (isImportant)
+        {
+            SocialBatteryManager.instance.SubtractSocialBattery(1);
+        }
+
+        skipLineTriggered = false;
+        StartCoroutine(RunDialogue(dialogueTree,dialogueTree.sections[section].branchPoint.answers[answerIndex].nextElement));
     }
 
     void ResetBox()

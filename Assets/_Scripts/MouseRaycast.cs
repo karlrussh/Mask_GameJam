@@ -50,9 +50,12 @@ public class MouseRaycast : MonoBehaviour
             
             if (hit.collider.CompareTag("Character"))
             {
+                if (GameManager.Instance.State == GameState.InConversation) return;
+                if (SocialBatteryManager.instance.CurrentSocialBattery == 0) return;
+
                 storedNPC = hit.collider.GetComponent<NPC>();
                 dialogueManager.CharacterImage = storedNPC.npcImage;
-                TransitionManager.instance.StartTranstion();
+                TransitionManager.instance.StartTranstion(true, true, GameState.InConversation);
             }
         } 
     }
