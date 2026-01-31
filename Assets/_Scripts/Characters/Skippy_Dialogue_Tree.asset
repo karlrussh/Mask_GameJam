@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fcb7a7f87c3ca44b921121ae839a0e, type: 3}
+  m_Name: Skippy_Dialogue_Tree
+  m_EditorClassIdentifier: 
+  sections:
+  - dialogue:
+    - Yo...
+    endAfterDialogue: 0
+    branchPoint:
+      question: What do you want?
+      answers:
+      - answerLabel: Who are you?
+        nextElement: 1
+      - answerLabel: You good?
+        nextElement: 2
+      - answerLabel: yo
+        nextElement: 3

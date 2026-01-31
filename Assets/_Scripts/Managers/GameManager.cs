@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +34,9 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
+            case GameState.GameStart:
+                HandleGameStart();
+                break;
             case GameState.Inside:
                 HandleInside();
                 break;
@@ -39,7 +44,7 @@ public class GameManager : MonoBehaviour
                 HandleRest();
                 break;
             case GameState.InConversation:
-                HandleConverstation();
+                HandleConversation();
                 break;
             case GameState.WinState:
                 HandleWin();
@@ -50,6 +55,11 @@ public class GameManager : MonoBehaviour
         }
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    private void HandleGameStart()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void HandleInside ()
@@ -75,6 +85,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
+    GameStart,
     Inside,
     InRest,
     InConversation,
