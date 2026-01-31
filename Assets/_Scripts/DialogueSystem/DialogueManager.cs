@@ -37,7 +37,6 @@ public class DialogueManager : MonoBehaviour
         ResetBox();
         nameText.text = name + "...";
         dialoguePanel.SetActive(true);
-        CharacterImage.gameObject.SetActive(true);
         OnDialogueStarted?.Invoke();
         StartCoroutine(RunDialogue(dialogueTree, startSection));
     }
@@ -69,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         {
             yield return null;
         }
-        //answerBox.SetActive(false);
+        answerBox.SetActive(false);
         answerTriggered = false;
 
         StartCoroutine(RunDialogue(dialogueTree, dialogueTree.sections[section].branchPoint.answers[answerIndex].nextElement));
@@ -79,8 +78,7 @@ public class DialogueManager : MonoBehaviour
     {
         StopAllCoroutines();
         dialoguePanel.SetActive(false);
-        CharacterImage.gameObject.SetActive(false);
-        //answerBox.SetActive(false);
+        answerBox.SetActive(false);
         skipLineTriggered = false;
         answerTriggered = false;
     }
@@ -88,7 +86,7 @@ public class DialogueManager : MonoBehaviour
     void ShowAnswers(BranchPoint branchPoint)
     {
         // Reveals the aselectable answers and sets their text values
-        //answerBox.SetActive(true);
+        answerBox.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
             if (i < branchPoint.answers.Length)

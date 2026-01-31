@@ -25,3 +25,15 @@ MonoBehaviour:
         nextElement: 2
       - answerLabel: yo
         nextElement: 3
+  - dialogue:
+    - Skippy
+    endAfterDialogue: 1
+    branchPoint:
+      question: What do you want?
+      answers:
+      - answerLabel: Who are you?
+        nextElement: 1
+      - answerLabel: You good?
+        nextElement: 2
+      - answerLabel: yo
+        nextElement: 3

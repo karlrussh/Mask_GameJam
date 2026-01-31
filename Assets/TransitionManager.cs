@@ -9,6 +9,7 @@ public class TransitionManager : MonoBehaviour
     public static TransitionManager instance;
 
     [SerializeField] RawImage transitionImage;
+    [SerializeField] RawImage CharacterImage;
 
     [SerializeField] float duration = 2.0f;
 
@@ -44,7 +45,8 @@ public class TransitionManager : MonoBehaviour
         SetAlpha(1f);
 
         yield return new WaitForSeconds(0.5f);
-
+        CharacterImage.gameObject.SetActive(true);
+        
         elapsed = 0f;
         while (elapsed < duration)
         {
@@ -56,7 +58,7 @@ public class TransitionManager : MonoBehaviour
 
         SetAlpha(0f);
         transitionImage.gameObject.SetActive(false);
-        
+
         OnTransitionEnded?.Invoke();
     }
 
