@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
     [SerializeField] bool firstInteraction = true;
     [SerializeField] int repeatStartPosition;
-
+    
+    public RawImage npcImage;
     public string npcName;
-    public DialogueAsset dialogueAsset;
+    public DialogueTree dialogueAssetTree;
 
     [HideInInspector]
     public int StartPosition {

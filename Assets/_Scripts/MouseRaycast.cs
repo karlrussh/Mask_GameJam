@@ -8,16 +8,22 @@ public class MouseRaycast : MonoBehaviour
 
     bool inConversation;
 
+    private NPC storedNPC;
+
     private void OnEnable()
     {
         DialogueManager.OnDialogueStarted += JoinConversation;
         DialogueManager.OnDialogueEnded += LeaveConversation;
+
+        TransitionManager.OnTransitionEnded += OnTransitionEnded;
     }
 
     private void OnDisable()
     {
         DialogueManager.OnDialogueStarted -= JoinConversation;
         DialogueManager.OnDialogueEnded -= LeaveConversation;
+
+        TransitionManager.OnTransitionEnded -= OnTransitionEnded;
     }
 
     void Update()
@@ -44,10 +50,20 @@ public class MouseRaycast : MonoBehaviour
             
             if (hit.collider.CompareTag("Character"))
             {
-                var npc = hit.collider.GetComponent<NPC>();                    
-                dialogueManager.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
+                storedNPC = hit.collider.GetComponent<NPC>();
+                dialogueManager.CharacterImage = storedNPC.npcImage;
+                TransitionManager.instance.StartTranstion();
             }
         } 
+    }
+
+    private void OnTransitionEnded()
+    {
+        if (storedNPC == null) return;
+
+        dialogueManager.StartDialogue(storedNPC.dialogueAssetTree, storedNPC.StartPosition, storedNPC.npcName);
+
+        storedNPC = null;
     }
 
     void JoinConversation()
@@ -58,5 +74,6 @@ public class MouseRaycast : MonoBehaviour
     void LeaveConversation()
     {
         inConversation = false;
+        dialogueManager.CharacterImage = null;
     }
 }
