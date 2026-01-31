@@ -54,7 +54,7 @@ public class MouseRaycast : MonoBehaviour
                 if (SocialBatteryManager.instance.CurrentSocialBattery == 0) return;
 
                 storedNPC = hit.collider.GetComponent<NPC>();
-                dialogueManager.CharacterImage = storedNPC.npcImage;
+                dialogueManager.CharacterImage.texture = storedNPC.npcImage;
                 TransitionManager.instance.StartTranstion(true, true, GameState.InConversation);
             }
         } 

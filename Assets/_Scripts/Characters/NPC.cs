@@ -6,7 +6,7 @@ public class NPC : MonoBehaviour
     [SerializeField] bool firstInteraction = true;
     [SerializeField] int repeatStartPosition;
     
-    public RawImage npcImage;
+    public Texture2D npcImage;
     public string npcName;
     public DialogueTree dialogueAssetTree;
 
